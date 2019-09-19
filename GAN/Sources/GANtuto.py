@@ -13,7 +13,7 @@ import time
 
 from IPython import display
 
-quit()
+print ("import done")
 
 def make_generator_model():
     model = tf.keras.Sequential()
@@ -58,6 +58,8 @@ def make_discriminator_model():
 
 (train_images, train_labels), (_, _) = tf.keras.datasets.mnist.load_data()
 
+print ("Got databases")
+
 train_images = train_images.reshape(train_images.shape[0], 28, 28, 1).astype('float32')
 train_images = (train_images - 127.5) / 127.5 # Normalize the images to [-1, 1]
 
@@ -67,6 +69,11 @@ BATCH_SIZE = 256
 # Batch and shuffle the data
 train_dataset = tf.data.Dataset.from_tensor_slices(train_images).shuffle(BUFFER_SIZE).batch(BATCH_SIZE)
 
+
+print ("Shuffled them")
+
+
+
 generator = make_generator_model()
 
 noise = tf.random.normal([1, 100])
@@ -74,10 +81,18 @@ generated_image = generator(noise, training=False)
 
 plt.imshow(generated_image[0, :, :, 0], cmap='gray')
 
+print ("First image generated")
+
+plt.show()
 
 discriminator = make_discriminator_model()
 decision = discriminator(generated_image)
 print (decision)
+
+print ("First decision taken")
+
+quit()
+
 
 # This method returns a helper function to compute cross entropy loss
 cross_entropy = tf.keras.losses.BinaryCrossentropy(from_logits=True)
