@@ -82,8 +82,9 @@ generated_image = generator(noise, training=False)
 plt.imshow(generated_image[0, :, :, 0], cmap='gray')
 
 print ("First image generated")
+plt.draw()
+plt.pause(0.01)
 
-plt.show()
 
 discriminator = make_discriminator_model()
 decision = discriminator(generated_image)
@@ -91,7 +92,6 @@ print (decision)
 
 print ("First decision taken")
 
-quit()
 
 
 # This method returns a helper function to compute cross entropy loss
@@ -112,6 +112,7 @@ def generator_loss(fake_output):
 generator_optimizer = tf.keras.optimizers.Adam(1e-4)
 discriminator_optimizer = tf.keras.optimizers.Adam(1e-4)
 
+print ("Saving Checkpoint before training")
 checkpoint_dir = './training_checkpoints'
 checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
 checkpoint = tf.train.Checkpoint(generator_optimizer=generator_optimizer,
@@ -152,16 +153,21 @@ def train(dataset, epochs):
   for epoch in range(epochs):
     start = time.time()
 
+    i=0
     for image_batch in dataset:
+      print ("epoch", epoch, "batch",i)
       train_step(image_batch)
+      i+=1
 
     # Produce images for the GIF as we go
+    print ("save images")
     display.clear_output(wait=True)
     generate_and_save_images(generator,
                              epoch + 1,
                              seed)
 
     # Save the model every 15 epochs
+    print ("save checkpoint during learning")
     if (epoch + 1) % 15 == 0:
       checkpoint.save(file_prefix = checkpoint_prefix)
 
@@ -186,10 +192,15 @@ def generate_and_save_images(model, epoch, test_input):
       plt.axis('off')
 
   plt.savefig('image_at_epoch_{:04d}.png'.format(epoch))
-  plt.show()
+  plt.draw()
+  plt.pause(0.01)
 
+
+print ("defined a bunch of functions")
 ##time
+print ("begin training")
 train(train_dataset, EPOCHS)
+print ("end training")
 
 
 checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
@@ -218,3 +229,5 @@ with imageio.get_writer(anim_file, mode='I') as writer:
 import IPython
 if IPython.version_info > (6,2,0,''):
   display.Image(filename=anim_file)
+
+plt.show()

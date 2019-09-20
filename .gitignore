@@ -1,3 +1,8 @@
+# Images générées par le GAN
+GAN/Sources/*.png
+GAN/Sources/*.gif
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
