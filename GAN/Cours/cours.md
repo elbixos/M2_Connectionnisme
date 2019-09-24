@@ -157,6 +157,11 @@ Voici quelques images obtenues au cours de l'apprentissage
 
 | epoch 1  | epoch 20  | epoch 50  |
 |---|---|---|---|---|
-| ![epoch0](image_at_epoch_0001.png)  | ![epoch0](image_at_epoch_0020.png)  | ![epoch0](image_at_epoch_0020.png)  |
+| ![epoch0](image_at_epoch_0001.png)  | ![epoch0](image_at_epoch_0020.png)  | ![epoch0](image_at_epoch_0050.png)  |
 
-Le tout sera présenté en animation sous peu
+Comme on peut le voir, le résultat à la fin des 50 epochs est relativement
+convaincant, meme si certains chiffres sont un poil étranges.
+
+Le tout en animation :
+
+![apprentissage](dcgan.gif)
