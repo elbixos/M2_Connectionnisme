@@ -76,3 +76,10 @@ intéressant de l'entrainer, puis de le tester avec des chiffres en couleurs...
 
 
 ### Le tutoriel
+
+Pour ce tutoriel, il vous faudra installer le module *tensorflow_datasets*
+dans votre environnement virtuel (au sujet des environnements virtuels,
+voir [le cours sur les GAN](../../GAN/Cours/) ).
+```
+python -m pip install tensorflow_datasets
+```
