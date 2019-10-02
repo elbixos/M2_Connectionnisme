@@ -11,7 +11,7 @@ capable de :
 ici : [https://www.theverge.com/2017/10/30/16569402/ai-generate-fake-faces-celebs-nvidia-gan](https://www.theverge.com/2017/10/30/16569402/ai-generate-fake-faces-celebs-nvidia-gan)
 - Jouer à un jeu stratégique, comme le go (vous avez sans doute entendu parler
   de alpha go)
-- réutiliser un réseau déja entrainé à quelque chose pour faire autre chose.
+- réutiliser un réseau déjà entrainé à quelque chose pour faire autre chose.
 
 Dans ce cours, nous vous montrerons les principes de ces techniques, sur
 des cas plus simples.
