@@ -21,4 +21,4 @@ Vous trouverez ici :
 
 - une aide à l'installation de Tensor Flow : [installTensorFlow.md](installTensorFlow.md)
 - le cours sur les **GAN** et ses sources [GAN/README.md](GAN/README.md)
-- le cours sur le **Transfert Learning** et ses sources [TransfertLearning/README.md](TransfertLearning/README.md)
+- le cours sur le **Transfert Learning** et ses sources [TransferLearning/README.md](TransferLearning/README.md)
