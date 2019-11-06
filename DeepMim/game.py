@@ -62,11 +62,9 @@ def isValidStrategy (line, nbMatches, board):
 
 def getValidNextStrategies (board):
     """
-    get an array of all possible strategy for the current state of the Board
+    get an array of all possible strategy for a board
     Each Strategy is a tuple containing (numLine, nbMatches)
 
-    One could ask the ValidStrategies for a different board. If so,
-    pass the board as a parameter
     """
 
     strategies = []
@@ -81,6 +79,26 @@ def changePlayer(numJoueur):
     numJoueur = (numJoueur+1)%2
     return numJoueur
 
+def humanMakeChoice(board):
+    print ("entrez un num de ligne")
+    line = int(input())
+    print ("entrez un nb d'allumettes'")
+    nbMatches = int(input())
+
+    ok = False
+    if isValidStrategy(line, nbMatches, board):
+        ok=True
+    while not ok:
+        print ("Erreur ")
+        print ("player", numJoueur, "make a choice")
+        print ("entrez un num de ligne")
+        line = int(input())
+        print ("entrez un nb d'allumettes'")
+        nbMatches = int(input())
+        if isValidStrategy(line, nbMatches, board):
+            ok=True
+
+    return line, nbMatches
 
 def IAMakeChoice(board):
 
@@ -100,7 +118,6 @@ def IAMakeChoice(board):
         if resu > maxResu:
             maxResu = resu
             bestChoice=c
-
 
         '''
         if IA and resu == 1:
@@ -190,24 +207,8 @@ while(not isFinished(board)):
             print ("IA retire",nbMatches,"on line",line)
         else :
             print ("player", numJoueur, "make a choice")
-
-            print ("entrez un num de ligne")
-            line = int(input())
-            print ("entrez un nb d'allumettes'")
-            nbMatches = int(input())
-
-            ok = False
-            if isValidStrategy(line, nbMatches, board):
-                ok=True
-            while not ok:
-                print ("Erreur ")
-                print ("player", numJoueur, "make a choice")
-                print ("entrez un num de ligne")
-                line = int(input())
-                print ("entrez un nb d'allumettes'")
-                nbMatches = int(input())
-                if isValidStrategy(line, nbMatches, board):
-                    ok=True
+            line, nbMatches = humanMakeChoice(board)
+            print ("Human player",numJoueur, "retire",nbMatches,"on line",line)
 
         drawMatches(line, nbMatches,board)
 
