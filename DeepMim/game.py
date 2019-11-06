@@ -3,7 +3,7 @@ def displayBoard(board) :
         display the board
         """
         for i in range(len(board)) :
-            print(i + 1,":  ", end="")
+            print(i ,":  ", end="")
             for j in range(board[i]) :
                 print("I", end = "")
             print("")
@@ -82,8 +82,33 @@ def changePlayer(numJoueur):
     return numJoueur
 
 
+
+
 board = [7 , 5, 3, 1]
 numJoueur = 0
 
-print (getValidNextStrategies(board))
-displayBoard(board)
+while(not isFinished(board)):
+        displayBoard(board)
+        print ("player", numJoueur, "make a choice")
+
+        print ("entrez un num de ligne")
+        line = int(input())
+        print ("entrez un nb d'allumettes'")
+        nbMatches = int(input())
+
+        ok = False
+        if isValidStrategy(line, nbMatches, board):
+            ok=True
+        while not ok:
+            print ("Erreur ")
+            print ("player", numJoueur, "make a choice")
+            print ("entrez un num de ligne")
+            line = int(input())
+            print ("entrez un nb d'allumettes'")
+            nbMatches = int(input())
+            if isValidStrategy(line, nbMatches, board):
+                ok=True
+
+        drawMatches(line, nbMatches,board)
+
+        numJoueur = changePlayer(numJoueur)
