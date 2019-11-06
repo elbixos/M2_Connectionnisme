@@ -82,33 +82,139 @@ def changePlayer(numJoueur):
     return numJoueur
 
 
+def IAMakeChoice(board):
+
+    ## Il reste des allumette
+    choices = getValidNextStrategies (board)
+
+    maxResu = -2
+    bestChoice = (0,0)
+
+    known = {}
+    for c in choices:
+        line, nbMatches = c
+        nboard = board.copy()
+        drawMatches(line, nbMatches,nboard)
+        resu = evaluate(nboard, False,0,known)
+
+        if resu > maxResu:
+            maxResu = resu
+            bestChoice=c
+
+
+        '''
+        if IA and resu == 1:
+            return 1
+        if not IA and resu == -1:
+            return -1
+        '''
+    if maxResu == 1:
+        print ("je vais te piler")
+    else :
+        print ("Si tu joues bien, tu peux gagner")
+
+    return bestChoice
+
+def computeKey(tab):
+    triee = sorted(tab, reverse=True)
+    clef=0
+    N = len(tab)
+    for i in range(N):
+        clef+= triee[i]*10**(N-i-1)
+
+    return clef
+
+
+def evaluate(board, IA,level,known):
+    #print ("\t"*level,"evaluation de ", board)
+    clef = computeKey(board)
+
+    if clef in known:
+        oldResu=known[clef]
+        if IA:
+            return oldResu
+        else :
+            return -oldResu
+
+    if countMatches(board) == 0:
+        known[clef]= 1
+        if IA :
+            return 1
+        return -1
+
+    ## Il reste des allumette
+    choices = getValidNextStrategies (board)
+    #print(choices)
+    results =[]
+    for c in choices:
+        line, nbMatches = c
+        #print ("\t"*level,"je teste ",line, nbMatches)
+        nboard = board.copy()
+        drawMatches(line, nbMatches,nboard)
+        resu = evaluate(nboard, not IA,level+1,known)
+
+
+        if IA and resu == 1:
+            known[clef]=1
+            return 1
+        if not IA and resu == -1:
+            known[clef]=1
+            return -1
+
+        #print ("\t"*level,"resu pour", nboard," :" , resu)
+        results.append(resu)
+
+    if IA :
+        final= max(results)
+    else :
+        final = min(results)
+
+    known[clef]=final
+    return final
 
 
 board = [7 , 5, 3, 1]
 numJoueur = 0
 
+#print ("avec ",board ,"j'aurais ce resultat", evaluate(board,False,0))
+#print ("avec ",board ,"je joue ", IAMakeChoice(board))
+
+IA = 0
+
 while(not isFinished(board)):
         displayBoard(board)
-        print ("player", numJoueur, "make a choice")
 
-        print ("entrez un num de ligne")
-        line = int(input())
-        print ("entrez un nb d'allumettes'")
-        nbMatches = int(input())
-
-        ok = False
-        if isValidStrategy(line, nbMatches, board):
-            ok=True
-        while not ok:
-            print ("Erreur ")
+        if numJoueur==IA:
+            print ("IA Playing")
+            line, nbMatches = IAMakeChoice(board)
+            print ("IA retire",nbMatches,"on line",line)
+        else :
             print ("player", numJoueur, "make a choice")
+
             print ("entrez un num de ligne")
             line = int(input())
             print ("entrez un nb d'allumettes'")
             nbMatches = int(input())
+
+            ok = False
             if isValidStrategy(line, nbMatches, board):
                 ok=True
+            while not ok:
+                print ("Erreur ")
+                print ("player", numJoueur, "make a choice")
+                print ("entrez un num de ligne")
+                line = int(input())
+                print ("entrez un nb d'allumettes'")
+                nbMatches = int(input())
+                if isValidStrategy(line, nbMatches, board):
+                    ok=True
 
         drawMatches(line, nbMatches,board)
 
         numJoueur = changePlayer(numJoueur)
+
+if numJoueur == IA:
+    print ("IA gagne ")
+else :
+    print ("le joueur humain gagne")
+# print ("Joueur",numJoueur,"Vous avez gagnÃ©")
