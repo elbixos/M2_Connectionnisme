@@ -67,7 +67,7 @@ def changePlayer(numJoueur):
 
 
 
-board = [0,0,2,2]
+board = [7,5,3,1]
 numJoueur = 0
 
 #print ("avec ",board ,"j'aurais ce resultat", evaluate(board,False,0))
@@ -83,9 +83,6 @@ while(not isFinished(board)):
 
         if IA==numJoueur:
             print ("IA Playing")
-
-            print (players[numJoueur].evaluate(board,True,0,known))
-            print(known)
         else :
             print ("player", numJoueur, "make a choice")
 
