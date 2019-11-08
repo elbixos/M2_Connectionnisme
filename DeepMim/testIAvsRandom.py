@@ -78,16 +78,16 @@ for i in range(nbGames):
     #print ("avec ",board ,"j'aurais ce resultat", evaluate(board,False,0))
     #print ("avec ",board ,"je joue ", IAMakeChoice(board))
 
-    players=[]
-    
+
+    p1=player.IAMinMaxPlayer()
+    p2=player.IARandomPlayer()
+
     draw = random.random()
-    if draw <0:
-        players.append(player.IAMinMaxPlayer())
-        players.append(player.IARandomPlayer())
+    if draw <0.5:
+        players=[p1,p2]
         IA=0
     else :
-        players.append(player.IARandomPlayer())
-        players.append(player.IAMinMaxPlayer())
+        players=[p2,p1]
         IA=1
 
 
