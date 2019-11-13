@@ -46,6 +46,8 @@ qu'il n'y a en fait que 143 valeurs possibles...
 
 ### Du Réseau de Neurone la dedans.
 
+#### Principe
+
 Le réseau de neurone n'a qu'une chose à faire :
 On lui donne un tableau (bien trié) : [3,1,1,0]
 et il doit évaluer ceci (idéalement -1 ou 1)
@@ -57,3 +59,9 @@ Commencons par créer une base de ces valeurs.
 
 Le fichier [../Sources/saveEvaluations.py](../Sources/saveEvaluations.py) sauve
 cette table en un fichier csv : [../Sources/evalMim.csv](../Sources/evalMim.csv)
+
+#### Construisons le réseau.
+
+Notre réseau sera simple : 4 entrées, 1 sortie.
+
+Au milieu, disons 2 ou 3 couches pas trop grosses et on sera bon.
