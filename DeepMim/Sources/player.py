@@ -183,3 +183,64 @@ class IARandomPlayer(Player):
             ## Il reste des allumette
             choices = self.getValidNextStrategies (board)
             return random.choice(choices)
+
+
+class IADeepPlayer(Player):
+    def __init__(self):
+        checkpoint_path = "training_1/cp.ckpt"
+        self.model = self.build_model()
+        self.load_model(checkpoint_path)
+
+    def build_model(self):
+      model = keras.Sequential([
+        layers.Dense(16, activation='relu', input_shape=[4]),
+        layers.Dense(16, activation='relu'),
+        layers.Dense(1)
+      ])
+
+      optimizer = tf.keras.optimizers.RMSprop(0.001)
+
+      model.compile(loss='mse',
+                    optimizer=optimizer,
+                    metrics=['mae', 'mse'])
+      return model
+
+     def load_model(self,checkpoint_path):
+         # Loads the weights
+         self.model.load_weights(checkpoint_path)
+
+
+    def makeChoice(self,board):
+
+        ## Il reste des allumette
+        choices = self.getValidNextStrategies (board)
+
+        maxResu = -2
+        bestChoice = (0,0)
+
+        known = {}
+        for c in choices:
+            line, nbMatches = c
+            nboard = board.copy()
+            nboard[line]-=nbMatches
+            resu = self.evaluate(nboard, False,0,known)
+
+
+            if resu > maxResu:
+                maxResu = resu
+                bestChoice=c
+
+            '''
+            if IA and resu == 1:
+                return 1
+            if not IA and resu == -1:
+                return -1
+            '''
+        '''
+        if maxResu == 1:
+            print ("je vais te piler")
+        else :
+            print ("Si tu joues bien, tu peux gagner")
+        '''
+
+        return bestChoice
