@@ -184,6 +184,11 @@ class IARandomPlayer(Player):
             choices = self.getValidNextStrategies (board)
             return random.choice(choices)
 
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
+
+import os
 
 class IADeepPlayer(Player):
     def __init__(self):
@@ -218,13 +223,12 @@ class IADeepPlayer(Player):
         maxResu = -2
         bestChoice = (0,0)
 
-        known = {}
         for c in choices:
             line, nbMatches = c
             nboard = board.copy()
             nboard[line]-=nbMatches
-            resu = self.evaluate(nboard, False,0,known)
-
+            resu = self.model.predict(nboard)
+            resu = resu
 
             if resu > maxResu:
                 maxResu = resu
