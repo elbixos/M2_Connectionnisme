@@ -93,6 +93,7 @@ def plot_history(history):
 
 plot_history(history)
 
+## Voyons comment il se débrouille maintenant en prédiction
 example_batch = dataset[:5]
 example_result = model.predict(example_batch)
 example_result
