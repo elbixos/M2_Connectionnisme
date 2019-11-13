@@ -1,16 +1,15 @@
-'''
+
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import pathlib
-
 import tensorflow as tf
-
 from tensorflow import keras
 from tensorflow.keras import layers
+import pandas as pd
 
 def build_model():
   model = keras.Sequential([
-    layers.Dense(16, activation='relu', input_shape=[len(train_dataset.keys())]),
+    layers.Dense(16, activation='relu', input_shape=[4]),
     layers.Dense(16, activation='relu'),
     layers.Dense(1)
   ])
@@ -21,10 +20,6 @@ def build_model():
                 optimizer=optimizer,
                 metrics=['mae', 'mse'])
   return model
-'''
-
-import pandas as pd
-
 
 
 dataset_path = 'evalMim.csv'
@@ -35,3 +30,60 @@ raw_dataset = pd.read_csv(dataset_path, names=column_names,
 
 dataset = raw_dataset.copy()
 dataset.tail()
+
+train_labels = dataset.pop('eval')
+dataset.tail()
+train_labels.tail()
+
+example_batch = dataset[:5]
+example_result = model.predict(example_batch)
+example_result
+
+# Display training progress by printing a single dot for each completed epoch
+class PrintDot(keras.callbacks.Callback):
+  def on_epoch_end(self, epoch, logs):
+    if epoch % 100 == 0: print('')
+    print('.', end='')
+
+EPOCHS = 1000
+
+history = model.fit(
+  dataset, train_labels,
+  epochs=EPOCHS, validation_split = 0.2, verbose=0,
+  callbacks=[PrintDot()])
+
+
+
+def plot_history(history):
+  hist = pd.DataFrame(history.history)
+  hist['epoch'] = history.epoch
+
+  plt.figure()
+  plt.xlabel('Epoch')
+  plt.ylabel('Mean Abs Error [eval]')
+  plt.plot(hist['epoch'], hist['mae'],
+           label='Train Error')
+  plt.plot(hist['epoch'], hist['val_mae'],
+           label = 'Val Error')
+  plt.ylim([0,5])
+  plt.legend()
+
+  plt.figure()
+  plt.xlabel('Epoch')
+  plt.ylabel('Mean Square Error [$eval^2$]')
+  plt.plot(hist['epoch'], hist['mse'],
+           label='Train Error')
+  plt.plot(hist['epoch'], hist['val_mse'],
+           label = 'Val Error')
+  plt.ylim([0,20])
+  plt.legend()
+  plt.show()
+
+
+plot_history(history)
+
+example_batch = dataset[:5]
+example_result = model.predict(example_batch)
+example_result
+examples_labels = train_labels[:5]
+examples_labels
