@@ -124,7 +124,7 @@ class IAMinMaxPlayer(Player):
         return clef
 
 
-    def evaluate(self,board, IA,level,known):
+    def evaluate(self,board, IA,level,known,prune=True):
         #print ("\t"*level,"evaluation de ", board)
         #print ("\t"*level,"kown avant", known)
         clef = self.computeKey(board)
@@ -152,15 +152,16 @@ class IAMinMaxPlayer(Player):
             #print ("\t"*level,"je teste ",line, nbMatches)
             nboard = board.copy()
             nboard[line]-=nbMatches
-            resu = self.evaluate(nboard, not IA,level+1,known)
+            resu = self.evaluate(nboard, not IA,level+1,known,prune=prune)
 
-            if IA and (resu == 1):
-                known[clef]=1
-                #print ("\t"*level,"known 1", known)
-                return 1
-            if (not IA) and (resu == -1):
-                #print ("\t"*level,"known 2", known)
-                return -1
+            if prune:
+                if IA and (resu == 1):
+                    known[clef]=1
+                    #print ("\t"*level,"known 1", known)
+                    return 1
+                if (not IA) and (resu == -1):
+                    #print ("\t"*level,"known 2", known)
+                    return -1
 
             #print ("\t"*level,"resu pour", nboard," :" , resu)
             results.append(resu)
