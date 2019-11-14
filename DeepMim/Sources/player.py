@@ -187,8 +187,8 @@ class IADeepPlayer(Player):
 
     def build_model(self):
       model = keras.Sequential([
-        layers.Dense(16, activation='relu', input_shape=[4,]),
-        layers.Dense(16, activation='relu'),
+        layers.Dense(32, activation='relu', input_shape=[4,]),
+        layers.Dense(32, activation='relu'),
         layers.Dense(1)
       ])
 
