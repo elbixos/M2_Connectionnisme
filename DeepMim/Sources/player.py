@@ -205,7 +205,7 @@ class IADeepPlayer(Player):
 
 
     def makeChoice(self,board):
-
+        print("I'm there ",board)
         ## Il reste des allumette
         choices = self.getValidNextStrategies (board)
 
