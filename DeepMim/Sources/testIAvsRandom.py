@@ -79,7 +79,7 @@ for i in range(nbGames):
     #print ("avec ",board ,"je joue ", IAMakeChoice(board))
 
 
-    p1=player.IAMinMaxPlayer()
+    p1=player.IADeepPlayer()
     p2=player.IARandomPlayer()
 
     draw = random.random()
