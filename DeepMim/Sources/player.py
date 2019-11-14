@@ -218,7 +218,7 @@ class IADeepPlayer(Player):
             nboard[line]-=nbMatches
             npboard=np.asarray([nboard])
             resu = self.model.predict(npboard)
-            resu = resu
+            resu = resu[0][0]
 
             if resu > maxResu:
                 maxResu = resu
