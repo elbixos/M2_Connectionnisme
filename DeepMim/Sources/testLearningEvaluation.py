@@ -34,17 +34,20 @@ raw_dataset = pd.read_csv(dataset_path, names=column_names,
 dataset = raw_dataset.copy()
 train_labels = dataset.pop('eval')
 
-checkpoint_path = "training_1/cp.ckpt"
 
 model2 = build_model()
-
-# Loads the weights
+checkpoint_path = "training_1/cp.ckpt"
 model2.load_weights(checkpoint_path)
 
+def computeErrors(x,labels, predictions):
+  truths = labels.values
+  nbErrors=0
+  for i in range(len(truths)) :
+    if truths[i]*predictions[i][0] <=0 :
+      nbErrors += 1
+      print(i,"[",x.iloc[i,0],x.iloc[i,1],x.iloc[i,2],x.iloc[i,3],"]",truths[i],predictions[i][0])
+  return nbErrors
 
-example_batch = dataset[:5]
-example_result = model2.predict(example_batch)
-print(example_result)
+pred = model2.predict(dataset)
 
-examples_labels = train_labels[:5]
-print(examples_labels)
+print("Nb errors",computeErrors(dataset,train_labels,pred))

@@ -68,10 +68,10 @@ def changePlayer(numJoueur):
 
 
 victories=0
-nbGames = 1
+nbGames = 100
 
 p1=player.IADeepPlayer()
-p2=player.IARandomPlayer()
+p2=player.IAMinMaxPlayer()
 
 
 for i in range(nbGames):

@@ -205,7 +205,7 @@ class IADeepPlayer(Player):
 
 
     def makeChoice(self,board):
-        print("I'm there ",board)
+
         ## Il reste des allumette
         choices = self.getValidNextStrategies (board)
 
@@ -216,11 +216,10 @@ class IADeepPlayer(Player):
             line, nbMatches = c
             nboard = board.copy()
             nboard[line]-=nbMatches
-            npboard=np.asarray([nboard])
+            npboard=np.asarray([sorted(nboard, reverse=True)])
             resu = self.model.predict(npboard)
-            print(nboard,resu)
-            resu = resu[0][0]
-            print (resu)
+
+            resu = -resu[0][0]
 
             if resu > maxResu:
                 maxResu = resu
