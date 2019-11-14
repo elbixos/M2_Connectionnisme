@@ -42,17 +42,6 @@ class Player():
 
         return strategies
 
-    def countMatches (self,board):
-        """
-        Count matches on the board
-        """
-        nbAll =0
-        for ligne in board:
-            if ligne >= 0:
-                nbAll+=ligne
-        return nbAll
-
-
 
 class HumanPlayer(Player):
 
