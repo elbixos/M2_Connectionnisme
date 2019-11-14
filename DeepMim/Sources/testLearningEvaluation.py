@@ -24,8 +24,6 @@ def build_model():
                 metrics=['mae', 'mse'])
   return model
 
-model = build_model()
-
 dataset_path = keras.utils.get_file("evalMim.csv", "https://raw.githubusercontent.com/elbixos/M2_Connectionnisme/master/DeepMim/Sources/evalMim.csv")
 
 column_names = ['line1','line2','line3','line4','eval']
@@ -34,15 +32,7 @@ raw_dataset = pd.read_csv(dataset_path, names=column_names,
                       sep=",", skipinitialspace=True)
 
 dataset = raw_dataset.copy()
-dataset.tail()
-
 train_labels = dataset.pop('eval')
-dataset.tail()
-train_labels.tail()
-
-example_batch = dataset[:5]
-example_result = model.predict(example_batch)
-example_result
 
 checkpoint_path = "training_1/cp.ckpt"
 
