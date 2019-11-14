@@ -54,7 +54,7 @@ model2.load_weights(checkpoint_path)
 
 example_batch = dataset[:5]
 example_result = model2.predict(example_batch)
-example_result
+print(example_result)
 
 examples_labels = train_labels[:5]
-examples_labels
+print(examples_labels)
