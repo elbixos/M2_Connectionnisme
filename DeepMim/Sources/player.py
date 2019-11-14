@@ -187,7 +187,7 @@ class IARandomPlayer(Player):
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
-
+import numpy as np
 import os
 
 class IADeepPlayer(Player):
@@ -198,7 +198,7 @@ class IADeepPlayer(Player):
 
     def build_model(self):
       model = keras.Sequential([
-        layers.Dense(16, activation='relu', input_shape=[4]),
+        layers.Dense(16, activation='relu', input_shape=[4,]),
         layers.Dense(16, activation='relu'),
         layers.Dense(1)
       ])
@@ -210,9 +210,9 @@ class IADeepPlayer(Player):
                     metrics=['mae', 'mse'])
       return model
 
-     def load_model(self,checkpoint_path):
-         # Loads the weights
-         self.model.load_weights(checkpoint_path)
+    def load_model(self,checkpoint_path):
+        # Loads the weights
+        self.model.load_weights(checkpoint_path)
 
 
     def makeChoice(self,board):
@@ -227,7 +227,8 @@ class IADeepPlayer(Player):
             line, nbMatches = c
             nboard = board.copy()
             nboard[line]-=nbMatches
-            resu = self.model.predict(nboard)
+            npboard=np.asarray([nboard])
+            resu = self.model.predict(npboard)
             resu = resu
 
             if resu > maxResu:

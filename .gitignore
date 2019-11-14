@@ -4,6 +4,7 @@ GAN/Sources/*.gif
 
 # Checkpoints
 GAN/Sources/training_checkpoints
+DeepMim/Sources/training_1
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

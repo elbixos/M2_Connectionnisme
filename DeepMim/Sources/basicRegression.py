@@ -6,12 +6,13 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 import pandas as pd
+import matplotlib.pyplot as plt
 
 import os
 
 def build_model():
   model = keras.Sequential([
-    layers.Dense(16, activation='relu', input_shape=[4]),
+    layers.Dense(16, activation='relu', input_shape=[4,]),
     layers.Dense(16, activation='relu'),
     layers.Dense(1)
   ])
@@ -23,6 +24,7 @@ def build_model():
                 metrics=['mae', 'mse'])
   return model
 
+model = build_model()
 
 dataset_path = 'evalMim.csv'
 column_names = ['line1','line2','line3','line4','eval']
@@ -116,3 +118,9 @@ example_result
 
 examples_labels = train_labels[:5]
 examples_labels
+
+import numpy as np
+
+board=[7,5,3,1]
+npboard = np.asarray([board])
+model2.predict(npboard)

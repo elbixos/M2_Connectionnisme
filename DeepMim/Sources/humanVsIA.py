@@ -1,5 +1,6 @@
 import player
 
+
 def displayBoard(board) :
         """
         display the board
@@ -75,7 +76,7 @@ numJoueur = 0
 known = {}
 IA = 0
 players=[]
-players.append(player.IAMinMaxPlayer())
+players.append(player.IADeepPlayer())
 players.append(player.HumanPlayer())
 
 while(not isFinished(board)):
