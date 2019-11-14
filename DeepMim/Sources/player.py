@@ -218,7 +218,7 @@ class IADeepPlayer(Player):
             nboard[line]-=nbMatches
             npboard=np.asarray([nboard])
             resu = self.model.predict(npboard)
-            print(board,resu)
+            print(nboard,resu)
             resu = resu[0][0]
             print (resu)
 
