@@ -184,7 +184,7 @@ class IADeepPlayer(Player):
     def __init__(self):
         checkpoint_path = "training_1/cp.ckpt"
         self.model = mymodel.build_model()
-        self.model.load_model(checkpoint_path)
+        self.model.load_weights(checkpoint_path)
 
 
     def load_model(self,modelcheckpoint_path):
