@@ -9,20 +9,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 import os
+import mymodel
 
-def build_model():
-  model = keras.Sequential([
-    layers.Dense(32, activation='relu', input_shape=[4,]),
-    layers.Dense(32, activation='relu'),
-    layers.Dense(1)
-  ])
-
-  optimizer = tf.keras.optimizers.RMSprop(0.001)
-
-  model.compile(loss='mse',
-                optimizer=optimizer,
-                metrics=['mae', 'mse'])
-  return model
 
 dataset_path = keras.utils.get_file("evalMim.csv", "https://raw.githubusercontent.com/elbixos/M2_Connectionnisme/master/DeepMim/Sources/evalMim.csv")
 
@@ -35,7 +23,7 @@ dataset = raw_dataset.copy()
 train_labels = dataset.pop('eval')
 
 
-model2 = build_model()
+model2 = mymodel.Model.build_model()
 checkpoint_path = "training_1/cp.ckpt"
 model2.load_weights(checkpoint_path)
 

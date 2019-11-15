@@ -9,22 +9,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 import os
+import mymodel
 
-def build_model():
-  model = keras.Sequential([
-    layers.Dense(32, activation='relu', input_shape=[4,]),
-    layers.Dense(32, activation='relu'),
-    layers.Dense(1)
-  ])
 
-  optimizer = tf.keras.optimizers.RMSprop(0.001)
-
-  model.compile(loss='mse',
-                optimizer=optimizer,
-                metrics=['mae', 'mse'])
-  return model
-
-model = build_model()
+model = myModel.Model.build_model()
 
 dataset_path = 'evalMim.csv'
 column_names = ['line1','line2','line3','line4','eval']
@@ -106,7 +94,7 @@ examples_labels
 ### Chargement du réseau
 
 # Create a basic model instance
-model2 = build_model()
+model2 = myModel.Model.build_model()
 
 # Loads the weights
 model2.load_weights(checkpoint_path)

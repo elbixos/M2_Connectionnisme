@@ -178,31 +178,18 @@ from tensorflow import keras
 from tensorflow.keras import layers
 import numpy as np
 import os
+import mymodel
 
 class IADeepPlayer(Player):
     def __init__(self):
         checkpoint_path = "training_1/cp.ckpt"
-        self.model = self.build_model()
+        self.model = mymodel.Model.build_model()
         self.load_model(checkpoint_path)
 
-    def build_model(self):
-      model = keras.Sequential([
-        layers.Dense(32, activation='relu', input_shape=[4,]),
-        layers.Dense(32, activation='relu'),
-        layers.Dense(1)
-      ])
 
-      optimizer = tf.keras.optimizers.RMSprop(0.001)
-
-      model.compile(loss='mse',
-                    optimizer=optimizer,
-                    metrics=['mae', 'mse'])
-      return model
-
-    def load_model(self,checkpoint_path):
+    def load_model(self,modelcheckpoint_path):
         # Loads the weights
         self.model.load_weights(checkpoint_path)
-
 
     def makeChoice(self,board):
 
