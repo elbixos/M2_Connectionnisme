@@ -34,10 +34,12 @@ example_result
 checkpoint_path = "training_1/cp.ckpt"
 checkpoint_dir = os.path.dirname(checkpoint_path)
 
+nbSamples = dataset.shape[0]
 # Create a callback that saves the model's weights
 cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path,
                                                  save_weights_only=True,
-                                                 verbose=1,save_freq=14300)
+                                                 verbose=1,
+                                                 save_freq=nbSamples*100)
 
 
 
