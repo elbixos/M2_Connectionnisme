@@ -2,6 +2,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import tensorflow as tf
 from tensorflow.keras import layers
+from tensorflow import keras
 
 def build_model():
     model = keras.Sequential([
