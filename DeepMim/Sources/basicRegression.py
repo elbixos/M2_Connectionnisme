@@ -63,7 +63,7 @@ EPOCHS = 1000
 
 history = model.fit(
   dataset, train_labels,
-  epochs=EPOCHS, validation_split = 0.2, verbose=0,
+  epochs=EPOCHS, verbose=0,
   callbacks=[PrintDot(),cp_callback])
 
 
