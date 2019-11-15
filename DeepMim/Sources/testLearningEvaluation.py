@@ -23,7 +23,7 @@ dataset = raw_dataset.copy()
 train_labels = dataset.pop('eval')
 
 
-model2 = mymodel.Model.build_model()
+model2 = mymodel.build_model()
 checkpoint_path = "training_1/cp.ckpt"
 model2.load_weights(checkpoint_path)
 
