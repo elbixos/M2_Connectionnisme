@@ -105,6 +105,17 @@ for i in range(nbGames):
             evals.append(-resu)
 
 
+    if IA == 0:
+        print ("je commence")
+    else :
+        print("l'autre commence")
+
+    if resu == 1:
+        print ("je gagne")
+    else
+        print ("l'autre gagne")
+
+    print ("J'ai appris ceci....")
     resu = players[IA].model.predict(np.asarray(allBoards))
     for i in range(len(allBoards)):
         print (allBoards[i],evals[i],resu[i])
