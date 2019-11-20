@@ -196,7 +196,7 @@ class IADeepPlayer(Player):
         '''
         cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=self.checkpoint_path,
                  save_weights_only=True,
-                 verbose=1)
+                 verbose=0)
 
         history = self.model.fit(
           np.asarray(boards), np.asarray(evals), verbose=0,
