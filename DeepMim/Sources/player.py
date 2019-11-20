@@ -186,11 +186,6 @@ class IADeepPlayer(Player):
         self.model = mymodel.build_model()
         self.model.load_weights(checkpoint_path)
 
-
-    def load_model(self,modelcheckpoint_path):
-        # Loads the weights
-        self.model.load_weights(checkpoint_path)
-
     def makeChoice(self,board):
 
         ## Il reste des allumette
