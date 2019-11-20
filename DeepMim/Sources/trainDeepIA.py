@@ -106,6 +106,6 @@ for i in range(nbGames):
 
     resu = players[IA].model.predict(np.asarray(allBoards))
     for i in range(len(allBoards)):
-        print (allBoards[i],evals[i],resu[i]
+        print (allBoards[i],evals[i],resu[i])
 
 print ("IA wins in ",victories, "over ",nbGames)
