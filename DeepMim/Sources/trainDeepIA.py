@@ -72,7 +72,7 @@ for i in range(nbGames):
     #print ("avec ",board ,"j'aurais ce resultat", evaluate(board,False,0))
     #print ("avec ",board ,"je joue ", IAMakeChoice(board))
     allBoards = []
-    allBoards.append(board.copy())
+    allBoards.append(sorted(board, reverse=True))
 
 
     draw = random.random()
@@ -88,21 +88,24 @@ for i in range(nbGames):
             line, nbMatches = players[numJoueur].makeChoice(board)
             drawMatches(line, nbMatches,board)
             numJoueur = changePlayer(numJoueur)
-            allBoards.append(board.copy())
+            allBoards.append(sorted(board, reverse=True))
 
     resu=-1
     if numJoueur == IA:
         victories+=1
         resu =1
 
-    toLearn=[]
+    evals = []
     for i in range(len(allBoards)):
 
         if i%2 == IA:
-            toLearn.append((allBoards[i],resu))
+            evals.append(resu)
         else:
-            toLearn.append((allBoards[i],-resu))
+            evals.append(-resu)
 
-    print (toLearn)
+
+    resu = players[IA].model.predict(np.asarray(allBoards))
+    for i in range(len(allBoards)):
+        print (allBoards[i],evals[i],resu[i]
 
 print ("IA wins in ",victories, "over ",nbGames)
