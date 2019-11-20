@@ -1,5 +1,6 @@
 import player
 import random
+import numpy as np
 
 
 def drawMatches (line, nbMatches,board):
