@@ -182,9 +182,9 @@ import mymodel
 
 class IADeepPlayer(Player):
     def __init__(self):
-        checkpoint_path = "training_1/cp.ckpt"
+        self.checkpoint_path = "training_1/cp.ckpt"
         self.model = mymodel.build_model()
-        self.model.load_weights(checkpoint_path)
+        self.model.load_weights(self.checkpoint_path)
         self.epsilon=0.2
 
     def trainOnce(self,boards,evals):
@@ -193,7 +193,7 @@ class IADeepPlayer(Player):
         A board is something like [3,1,0,0] and should be sorted...
         Eval is an array of the evaluations of each board
         '''
-        cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path,
+        cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=self.checkpoint_path,
                  save_weights_only=True,
                  verbose=1)
 
