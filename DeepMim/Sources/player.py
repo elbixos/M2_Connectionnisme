@@ -185,8 +185,9 @@ class IADeepPlayer(Player):
         checkpoint_path = "training_1/cp.ckpt"
         self.model = mymodel.build_model()
         self.model.load_weights(checkpoint_path)
+        self.epsilon=0.2
 
-    def makeChoice(self,board):
+    def makeChoice(self,board,train=False):
 
         ## Il reste des allumette
         choices = self.getValidNextStrategies (board)
@@ -219,5 +220,13 @@ class IADeepPlayer(Player):
         else :
             print ("Si tu joues bien, tu peux gagner")
         '''
-
-        return bestChoice
+        # En exploitation, on joue le meilleur coups possible
+        # en entrainement, on joue au hasard avec une probabilité de epsilon
+        # et on joue le meilleur coup avec une probabilité de 1-epsilon
+        if not train :
+            return bestChoice
+        else :
+            if random.random()<self.epsilon:
+                return random.choice(choices)
+            else :
+                return bestChoice
