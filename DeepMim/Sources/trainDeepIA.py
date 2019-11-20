@@ -86,7 +86,7 @@ for i in range(nbGames):
 
 
     while(not isFinished(board)):
-            line, nbMatches = players[numJoueur].makeChoice(board)
+            line, nbMatches = players[numJoueur].makeChoice(board,train=True)
             drawMatches(line, nbMatches,board)
             numJoueur = changePlayer(numJoueur)
             allBoards.append(sorted(board, reverse=True))
