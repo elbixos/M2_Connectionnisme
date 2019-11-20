@@ -112,7 +112,7 @@ for i in range(nbGames):
 
     if resu == 1:
         print ("je gagne")
-    else
+    else :
         print ("l'autre gagne")
 
     print ("J'ai appris ceci....")
