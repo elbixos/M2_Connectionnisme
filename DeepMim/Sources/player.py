@@ -207,7 +207,7 @@ class IADeepPlayer(Player):
         ## Il reste des allumette
         choices = self.getValidNextStrategies (board)
 
-        maxResu = -2
+        maxResu = float('-Inf')
         bestChoice = (0,0)
 
         for c in choices:

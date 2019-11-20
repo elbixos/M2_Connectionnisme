@@ -66,6 +66,10 @@ p2=player.IADeepPlayer()
 
 
 for i in range(nbGames):
+    percent = int((i*100)/nbGames)
+
+    if (percent%10==0):
+        print (str(percent)+"% done")
 
     board = [7 , 5, 3, 1]
     numJoueur = 0
