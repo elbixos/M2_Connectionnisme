@@ -184,7 +184,8 @@ class IADeepPlayer(Player):
     def __init__(self):
         self.checkpoint_path = "training_1/cp.ckpt"
         self.model = mymodel.build_model()
-        self.model.load_weights(self.checkpoint_path)
+        if os.path.isdir(self.checkpoint_path) and len(os.listdir(self.checkpoint_path)):
+            self.model.load_weights(self.checkpoint_path)
         self.epsilon=0.2
 
     def trainOnce(self,boards,evals):
