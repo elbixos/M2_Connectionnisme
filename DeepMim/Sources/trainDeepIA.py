@@ -108,4 +108,6 @@ for i in range(nbGames):
     for i in range(len(allBoards)):
         print (allBoards[i],evals[i],resu[i])
 
+    players[IA].trainOnce(allBoards,evals)
+
 print ("IA wins in ",victories, "over ",nbGames)

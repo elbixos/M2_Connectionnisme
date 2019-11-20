@@ -187,6 +187,20 @@ class IADeepPlayer(Player):
         self.model.load_weights(checkpoint_path)
         self.epsilon=0.2
 
+    def trainOnce(self,boards,evals):
+        '''
+        boards is an array of all boards to learn.
+        A board is something like [3,1,0,0] and should be sorted...
+        Eval is an array of the evaluations of each board
+        '''
+        cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path,
+                 save_weights_only=True,
+                 verbose=1)
+
+        history = self.model.fit(
+          np.asarray(boards), np.asarray(evals), verbose=0,
+          callbacks=[cp_callback])
+
     def makeChoice(self,board,train=False):
 
         ## Il reste des allumette
