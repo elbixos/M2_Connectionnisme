@@ -72,7 +72,7 @@ for i in range(nbGames):
     #print ("avec ",board ,"j'aurais ce resultat", evaluate(board,False,0))
     #print ("avec ",board ,"je joue ", IAMakeChoice(board))
     allBoards = []
-    allBoards.append(board)
+    allBoards.append(board.copy())
 
 
     draw = random.random()
@@ -88,7 +88,7 @@ for i in range(nbGames):
             line, nbMatches = players[numJoueur].makeChoice(board)
             drawMatches(line, nbMatches,board)
             numJoueur = changePlayer(numJoueur)
-            allBoards.append(board)
+            allBoards.append(board.copy())
 
     resu=-1
     if numJoueur == IA:
