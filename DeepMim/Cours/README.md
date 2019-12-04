@@ -69,4 +69,4 @@ Au milieu, disons 2 ou 3 couches pas trop grosses et on sera bon.
 #### Les tests :
 
 Le plus simple est de tester ceci avec un jupyter Notebook sur collab :
-[DeepMim.ipynb](DeepMim.ipynb)
+[DeepMim.ipynb](https://github.com/elbixos/M2_Connectionnisme/blob/master/DeepMim/Cours/DeepMim.ipynb)
