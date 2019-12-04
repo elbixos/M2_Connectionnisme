@@ -65,3 +65,8 @@ cette table en un fichier csv : [../Sources/evalMim.csv](../Sources/evalMim.csv)
 Notre réseau sera simple : 4 entrées, 1 sortie.
 
 Au milieu, disons 2 ou 3 couches pas trop grosses et on sera bon.
+
+#### Les tests :
+
+Le plus simple est de tester ceci avec un jupyter Notebook sur collab :
+[DeepMim.ipynb](DeepMim.ipynb)
